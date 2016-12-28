@@ -71,4 +71,10 @@ for pNum, prediction in enumerate(predictions):
     print(testNames[pNum] + " " + getSign(int(prediction)) + "1")
 
 if debug:
-    print(logit.score(trainingSlice, trainingAnswers))
+    content = open("output00.txt").readlines()
+    content = [line.strip('\n') for line in content]
+    cleanedContent = [entry[entry.index(" ") + 1:] for entry in content]
+
+    testAnswers = np.array([float(s) for s in cleanedContent])
+    print(testAnswers)
+    print(logit.score(testingSlice, testAnswers))
